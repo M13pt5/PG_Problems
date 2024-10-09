@@ -1,0 +1,61 @@
+//Problem matematyczny:
+//Generowanie ciągów liczb losowych metodą von Neumanna oraz analizowanie jak długi ciąg uda się wygenerować
+//Marzena Glama 176564
+#include<iostream>
+#include<vector>
+#include<math.h>
+
+using namespace std;
+
+int main(){
+int i;
+double a,b,d=9,e=1,n;
+vector<double> v;
+	cout << "Podaj ilosc liczb losowych, ktore chcesz uzyskac:";
+	cin >> n;
+	cout << "Podaj długosc liczb losowych, ktore chcesz uzyskac:";	
+	cin >> b;
+	cout << "Podaj ziarno:";
+	cin >> a;
+//wyznaczamy największą liczbę długości b+1
+	for(i;i<b;i++){
+		d=d*10+9;}
+	i=0;
+//wyznaczamy najmniejszą liczbę, której nasza próba nie może osiągnąć
+	for(i;i<b;i++){
+		e=e*10;}
+	i=0;
+	cout <<"Wygenerowany ciag bedzie przyjmowal wartosci ponizej: ";
+	cout << e;
+	cout << "\n";
+	for(i;i<n;i++){
+		a=a*a;
+		while(a>d){a=floor(a/10);}		//skracamy długość a do b+1
+		while(a>floor(d/10)){a=a-e;}	//usuwamy pierwszą cyfrę
+	v.push_back(a);
+	cout<<v.at(i)<<", ";
+	}
+	i=1; int j;
+//sprawdzamy po jak długim czasie ciąg zaczął się powtarzać
+	for(i;i<n;i++){
+		if(v.at(0)==v.at(i)){
+			cout << "\n Ciag losowy wraca do pierwszej wygenerowanej wartosci po "; 
+			cout << i;
+			cout << " miejscach.\n";
+			break;}
+		else if(v.at(i)==v.at(i+1)){
+			cout << "\n Ciag losowy zacina sie po "; 
+			cout << i;
+			cout << " miejscach.\n";
+			break;}
+		else{
+			for(j=(i+1);j<n;j++){
+				if(v.at(i)==v.at(j)){
+				cout << "\n Ciag losowy dochodzi do petli dlugosci "; 
+				cout << j-i;
+				goto koniec;}}
+		}
+	}
+	koniec:
+    return 0;
+}
